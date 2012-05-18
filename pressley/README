@@ -1,0 +1,14 @@
+Pressley is a press release repository that scrapes press releases from Fortune 500 companies, 
+trade organizations, news wires, nonprofits, think tanks and congressional leadership. 
+It's designed to take a CSV of sources and related XML feeds and load in their press releases. 
+The relevant management commands are 
+
+# loads sources from csv into a database. See feeds_fortune_500.csv example in repo
+./manage.py load_sources filename.csv  
+
+#runs through sources for source type 2 and loads in press releases from rss feeds
+./manage.py scrape_releases
+
+
+
+

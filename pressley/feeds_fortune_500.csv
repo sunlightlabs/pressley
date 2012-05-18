@@ -1,0 +1,501 @@
+F500 Rank,Company,RSS Feed?,PRNewsWire?,Feed or Release URL
+1,Exxon Mobil,Y,N,http://exxonmobil.newshq.businesswire.com/feeds/press_release/all/rss.xml
+2,Wal-Mart Stores,N,Y,http://www.walmartstores.com/pressroom/news/
+3,Chevron,Y,N,http://www.chevron.com/news/press/articles.rss
+4,ConocoPhillips,Y,N,http://www.conocophillips.com/_layouts/feed.aspx?xsl=1&web=%2FEN%2Fnewsroom%2Fnews_releases%2F2012NewsReleases&page=1f46368a-6a23-444b-8ff7-3f41aaa36854&wp=58b849b8-974c-4b34-8787-c9ea59f7eaf0
+5,General Motors,N,N,http://media.gm.com/media/us/en/gm/news.html
+6,General Electric,Y,N,http://www.genewscenter.com/rss/default.aspx?feedid={E05B7BCC-AA48-48E2-B4AB-2C2A8F98619B}
+7,Berkshire Hathaway,N,N,http://www.berkshirehathaway.com/news/2012news.html
+8,Fannie Mae,Y,Y,http://www.fanniemae.com/portal/jsp/rss.html
+9,Ford Motor,Y,Y,http://media.ford.com/rss.xml
+10,Hewlett-Packard,Y,Y,http://h30261.www3.hp.com/corporate.rss?c=71087&Rule=Cat=news~subcat=ALL
+11,AT&T,Y,Y,http://feeds.feedburner.com/AttAllCategoriesRssFeeds
+12,Valero Energy,Y,N,http://www.valero.com/NewsRoom/_layouts/NewsRSS.aspx?Category=Company%20News
+13,Bank of America Corp.,Y,N,http://mediaroom.bankofamerica.com/corporate.rss?c=234503&Rule=Cat=news~subcat=ALL
+14,McKesson,Y,N,http://feeds.mckesson.com/mckesson/news
+15,Verizon Communications,Y,Y,http://newscenter.verizon.com/system/rss/channel.jsp?subsiteID=136168510&feed=feed-31221791&feedFormat=rss2
+16,J.P. Morgan Chase & Co.,Y,N,http://apps.shareholder.com/rss/rss.aspx?channels=14&companyid=ONE&sh_auth=1863492435%2E0%2E0%2Edeec9374e8c0d9679612ce8975c87bc3
+17,Apple,Y,N,https://www.apple.com/pr/feeds/pr.rss
+18,CVS Caremark,Y,N,http://info.cvscaremark.com/newsroom/press-releases/feed
+19,International Business Machines,Y,Y,http://www-03.ibm.com/press/us/en/rssfeed.wss?keyword=&maxFeed=10&feedType=RSS&topic=all
+20,Citigroup,Y,N,http://www.citigroup.com/citi/news/press_rss.jsp
+21,Cardinal Health,Y,Y,http://cardinalhealth.mediaroom.com/index.php?s=43&pagetemplate=rss
+22,UnitedHealth Group,Y,N,http://www.unitedhealthgroup.com/Main/RSS.aspx
+23,Kroger,N,Y,http://www.thekrogerco.com/corpnews/corpnewsinfo_pressreleases.htm
+24,Costco Wholesale,Broken,N,http://phx.corporate-ir.net/phoenix.zhtml?c=83830&p=irol-news
+25,Freddie Mac,Y,Y,http://freddiemac.mediaroom.com/index.php?s=12329&pagetemplate=rss
+26,Wells Fargo,N,N,https://www.wellsfargo.com/press/yearIndex
+27,Procter & Gamble,Y,N,http://feeds.feedburner.com/PGNewsRelease
+28,Archer Daniels Midland,N,N,http://origin.adm.com/en-US/news/_layouts/PressReleaseList.aspx?more=true
+29,AmerisourceBergen,Y,N,http://www.amerisourcebergen.com/investor/corporate.rss?c=61181&Rule=Cat=news~subcat=ALL
+30,INTL FCStone,Y,N,http://apps.shareholder.com/rss/rss.aspx?channels=8589&companyid=AMDA-MQNVA&sh_auth=1863546360%2E0%2E0%2Ed28a1aba9a5d6476e6d7e3a05bd7099f
+31,Marathon Petroleum,Y,N,http://ir.marathonpetroleum.com/corporate.rss?c=246631&Rule=Cat=news~subcat=ALL
+32,Walgreen,Many,N,http://news.walgreens.com/rss_feeds.cfm
+33,American International Group,N,N,http://www.aigcorporate.com/newsroom/index.html
+34,MetLife,N,N,http://www.metlife.com/about/press-room/index.html?WT.ac=GN_about_press-room
+35,Home Depot,Y,Y,http://ir.homedepot.com/corporate.rss?c=63646&Rule=Cat=news~subcat=ALL
+36,Medco Health Solutions,Y,Y,http://phx.corporate-ir.net/corporate.rss?c=69641&Rule=Cat=news~subcat=ALL
+37,Microsoft,Y,Y,https://www.microsoft.com/en-us/news/rss/rssfeed.aspx?ContentType=PressReleases&Tags=
+38,Target,Y,N,http://pressroom.target.com/pr/news/news.xml
+39,Boeing,Y,Some,http://boeing.mediaroom.com/index.php?s=43&pagetemplate=rss
+40,Pfizer,Y,N,http://feed.businesswire.com/rss/pfizer/?&rss=G1QFDERJXkJcFFxWWg==
+41,PepsiCo,Y,Y,http://www.pepsico.com/RSS/All.rss
+42,Johnson & Johnson,Broken,Y,http://www.jnj.com/connect/news/all
+43,State Farm Insurance Cos.,Y,Y,https://www.statefarm.com/aboutus/_pressreleases/newsroom-en.xml
+44,Dell,Y,Few,http://content-cdn.dell.com/api/feeds.svc/rss/newsroom-press-releases?c=us&l=en&s=corp
+45,WellPoint,Y,N,http://feeds.feedburner.com/careersatwellpoint/DaeP
+46,Caterpillar,Y,Some,http://www.cat.com/cda/layout.rss?m=167201&x=7&f=149065
+47,Dow Chemical,Y,N,http://feed.businesswire.com/rss/dow/?rss=G1QFDERJXkJcE15YWw==
+48,United Technologies,Y,Y,http://utc.com/xmlfiles/UTC/News/All-News
+49,Comcast,N,Some,http://www.comcast.com/corporate/about/pressroom/pressreleases/pressreleases.ashx?SCRedirect=true
+50,Kraft Foods,N,Y,http://phx.corporate-ir.net/phoenix.zhtml?c=129070&p=irol-newsReleases&nyo=0
+51,Intel,Y,,http://newsroom.intel.com/community/feeds/allcontent?community=2016
+52,United Parcel Service,Y,,http://feeds2.feedburner.com/upsnews
+53,Best Buy,Y,,http://pr.bby.com/corporate.rss?c=244152&Rule=Cat=news~subcat=ALL
+54,Lowe's,Y,,http://media.lowes.com/rss.xml
+55,Prudential Financial,Y,,http://news.prudential.com/rss.xml
+56,Amazon.com,Y,,http://phx.corporate-ir.net/corporate.rss?c=176060&Rule=Cat=news~subcat=ALL
+57,Merck,Multiple,,http://www.merck.com/rss/home.html
+58,Lockheed Martin,N,,http://www.lockheedmartin.com/us/news/press-releases.html
+59,Coca-Cola,Y,,http://www.thecoca-colacompany.com/dynamic/press_center/atom.xml
+60,Express Scripts Holding,Y,,http://phx.corporate-ir.net/corporate.rss?c=69641&Rule=Cat=news~subcat=ALL
+61,Sunoco,N,,http://phx.corporate-ir.net/phoenix.zhtml?c=99437&p=irol-news&nyo=0
+62,Enterprise Products Partners,Y,,http://phx.corporate-ir.net/corporate.rss?c=80547&Rule=Cat=news~subcat=ALL
+63,Safeway,Y,,http://phx.corporate-ir.net/corporate.rss?c=64607&Rule=Cat=news~subcat=ALL
+64,Cisco Systems,Y,,http://newsroom.cisco.com/c/journal/get_articles?groupId=10157&cmd=rss&delta=10&type=press-release
+65,Sears Holdings,N,,http://www.searsholdings.com/pubrel/index.jsp
+66,Walt Disney,Y,,http://feeds.feedburner.com/TheWaltDisneyCompanyPressReleases
+67,Johnson Controls,Y,,http://uk.johnsoncontrols.mediaroom.com/index.php?s=1281&pagetemplate=rss
+68,Morgan Stanley,N,,http://www.morganstanley.com/about/press/index.html
+69,Sysco,N,,http://www.sysco.com/investor/pressreleases.html
+70,FedEx,Y,,http://feeds.feedburner.com/FedexNewsroom-PressReleases
+71,Abbott Laboratories,N,,http://www.abbott.com/global/url/pressReleases/en_US/60.5:5/general_content/Press_Release_Selector_01.htm
+72,DuPont,Y,,http://dupontsearch.asp.dupont.com/search?entqr=0&access=p&as_dt=i&entsp=0&sort=date%3AD%3AR%3Ad1&output=xml_no_dtd&ie=UTF-8&client=en_US&num=25&ud=1&site=default_collection&oe=UTF-8&as_q=inmeta%3ARSS~Daily_News&proxystylesheet=RSSFeed&as_occt=any&filter=0
+73,Google,Y,,http://feeds.feedburner.com/blogspot/MKuf
+74,Hess,Y,,http://phx.corporate-ir.net/corporate.rss?c=101801&Rule=Cat=news~subcat=ALL
+75,Supervalu,N,,http://www.supervaluinvestors.com/phoenix.zhtml?c=93272&p=irol-news&nyo=0
+76,United Continental Holdings,N,,http://www.unitedcontinentalholdings.com/index.php?section=media&page=releases
+77,Honeywell International,Y,,http://www51.honeywell.com/honeywell/news-events/press-releases.xml
+78,CHS,N,,http://www.chs.net/news/index.html
+79,Humana,N,,http://press.humana.com/portal/site/humana/
+80,Goldman Sachs Group,Y,,http://www.goldmansachs.com/media-relations/press-releases-and-comments/current/index.rss
+81,Ingram Micro,Y,,http://phx.corporate-ir.net/corporate.rss?c=98566&Rule=Cat=news~subcat=ALL
+82,Oracle,Y,,http://www.oracle.com/us/corporate/press/rss/rss-pr.xml
+83,Delta Air Lines,N,,http://news.delta.com/
+84,Liberty Mutual Insurance Group,Y,,http://www.libertymutualgroup.com/omapps/ContentServer?pagename=LMGroup/Views/lmgRSS
+85,World Fuel Services,Y,,http://ir.wfscorp.com/corporate.rss?c=101792&Rule=Cat=news~subcat=ALL
+86,New York Life Insurance,N,,http://www.newyorklife.com/nyl/v/index.jsp?contentId=148223&vgnextoid=2c0d4ccaa5ce4310VgnVCM100000ac841cacRCRD
+87,Plains All American Pipeline,N,,http://ir.paalp.com/News_Releases
+88,TIAA-CREF,N,,http://www.tiaa-cref.org/public/about/press/index.html
+89,Aetna,N,,http://www.aetna.com/news/newsReleases/index.html
+90,Sprint Nextel,Y,,http://newsroom.sprint.com/news/rss.xml
+91,News Corp.,N,,http://www.newscorp.com/news/index.html
+92,General Dynamics,N,,http://www.generaldynamics.com/news/press-releases/
+93,Allstate,Y,,http://www.allstatenewsroom.com/channels/News-Releases/releases/rss
+94,HCA Holdings,Y,,http://phx.corporate-ir.net/corporate.rss?c=63489&Rule=Cat=news~subcat=ALL
+95,American Express,N,,http://about.americanexpress.com/news/pr/releases.aspx
+96,Tyson Foods,Y,,http://www.tysonfoods.com/RSS-Feeds/Press-Releases.ashx?ID=
+97,Deere,Y,,http://search.deere.com/DDC/RSS/?country-site=en_US&query=asset-type:News
+98,Murphy Oil,N,,http://www.murphyoilcorp.com/ir/news.aspx
+99,Philip Morris International,Y,,http://investors.pmi.com/corporate.rss?c=146476&Rule=Cat=news~subcat=ALL
+100,Nationwide,Y,,http://rss.nationwide.com/f/100001s2svocg005vvi.rss
+101,Tesoro,Y,,http://phx.corporate-ir.net/corporate.rss?c=79122&Rule=Cat=news~subcat=ALL
+102,3M,Y,,http://news.3m.com/feeds/press_release/all/rss.xml
+103,Time Warner,Y,,http://ir.timewarnercable.com/corporate.rss?c=207717&Rule=Cat=news~subcat=ALL
+104,Northrop Grumman,Y,,http://www.irconnect.com/noc/press/xml/
+105,DirecTV,Y,,http://apps.shareholder.com/rss/rss.aspx?channels=4539&companyid=DTV&sh_auth=1865402592%2E1%2E0%2Ef8455f6a5f07a45ffef98f273ff0cd3d
+106,Publix Super Markets,,,
+107,McDonald's,,,
+108,Avnet,,,
+109,Tech Data,,,
+110,Macy's,,,
+111,International Paper,,,
+112,Travelers Cos.,,,
+113,Rite Aid,,,
+114,Staples,,,
+115,Alcoa,,,
+116,Northwestern Mutual,,,
+117,Raytheon,,,
+118,Halliburton,,,
+119,Eli Lilly,,,
+120,Emerson Electric,,,
+121,Massachusetts Mutual Life Insurance,,,
+122,Occidental Petroleum,,,
+123,AMR,,,
+124,Fluor,,,
+125,TJX,,,
+126,Goodyear Tire & Rubber,,,
+127,Xerox,,,
+128,Aflac,,,
+129,Manpower,,,
+130,Cigna,,,
+131,Hartford Financial Services Group,,,
+132,U.S. Bancorp,,,
+133,Arrow Electronics,,,
+134,Bristol-Myers Squibb,,,
+135,Freeport-McMoRan Copper & Gold,,,
+136,Nike,,,
+137,Kimberly-Clark,,,
+138,Nucor,,,
+139,EMC,,,
+140,United States Steel,,,
+141,Baker Hughes,,,
+142,Time Warner Cable,,,
+143,Union Pacific,,,
+144,United Services Automobile Assn.,,,
+145,Exelon,,,
+146,Kohl's,,,
+147,Whirlpool,,,
+148,Capital One Financial,,,
+149,Illinois Tool Works,,,
+150,Cummins,,,
+151,AES,,,
+152,Southern,,,
+153,J.C. Penney,,,
+154,Apache,,,
+155,Colgate-Palmolive,,,
+156,Altria Group,,,
+157,Jabil Circuit,,,
+158,Danaher,,,
+159,Paccar,,,
+160,FirstEnergy,,,
+161,TRW Automotive Holdings,,,
+162,Computer Sciences,,,
+163,Eaton,,,
+164,Medtronic,,,
+165,PNC Financial Services Group,,,
+166,Bank of New York Mellon Corp.,,,
+167,Southwest Airlines,,,
+168,Amgen,,,
+169,Progressive,,,
+170,HollyFrontier,,,
+171,CenturyLink,,,
+172,NextEra Energy,,,
+173,Marathon Oil,,,
+174,L-3 Communications,,,
+175,Oneok,,,
+176,American Electric Power,,,
+177,Viacom,,,
+178,Qualcomm,,,
+179,PG&E Corp.,,,
+180,PPG Industries,,,
+181,General Mills,,,
+182,Global Partners,,,
+183,Dollar General,,,
+184,National Oilwell Varco,,,
+185,Gap,,,
+186,Duke Energy,,,
+187,Dominion Resources,,,
+188,CBS,,,
+189,Lear,,,
+190,Loews,,,
+191,DISH Network,,,
+192,Anadarko Petroleum,,,
+193,Navistar International,,,
+194,"Toys ""R"" Us",,,
+195,Baxter International,,,
+196,Omnicom Group,,,
+197,AutoNation,,,
+198,Community Health Systems,,,
+199,Constellation Energy,,,
+200,Texas Instruments,,,
+201,Ally Financial,,,
+202,Chubb,,,
+203,Waste Management,,,
+204,Aramark,,,
+205,Kellogg,,,
+206,Motorola Mobility Holdings,,,
+207,Dean Foods,,,
+208,US Airways Group,,,
+209,Consolidated Edison,,,
+210,Land O'Lakes,,,
+211,Edison International,,,
+212,PPL,,,
+213,Yum Brands,,,
+214,Genuine Parts,,,
+215,ConAgra Foods,,,
+216,Parker Hannifin,,,
+217,Marriott International,,,
+218,Smithfield Foods,,,
+219,Coventry Health Care,,,
+220,Sara Lee,,,
+221,Health Net,,,
+222,Penske Automotive Group,,,
+223,Icahn Enterprises,,,
+224,Monsanto,,,
+225,Thermo Fisher Scientific,,,
+226,CSX,,,
+227,Starbucks,,,
+228,eBay,,,
+229,Chesapeake Energy,,,
+230,Liberty Interactive,,,
+231,Marsh & McLennan,,,
+232,Devon Energy,,,
+233,Office Depot,,,
+234,Avon Products,,,
+235,Aon,,,
+236,Textron,,,
+237,Huntsman,,,
+238,Praxair,,,
+239,Entergy,,,
+240,Public Service Enterprise Group,,,
+241,Norfolk Southern,,,
+242,Nordstrom,,,
+243,First Data,,,
+244,H.J. Heinz,,,
+245,SAIC,,,
+246,Xcel Energy,,,
+247,Lincoln National,,,
+248,Ameriprise Financial,,,
+249,R.R. Donnelley & Sons,,,
+250,Guardian Life Ins. Co. of America,,,
+251,Applied Materials,,,
+252,Stanley Black & Decker,,,
+253,Synnex,,,
+254,Jacobs Engineering Group,,,
+255,Peter Kiewit Sons',,,
+256,Limited Brands,,,
+257,Newmont Mining,,,
+258,Genworth Financial,,,
+259,C.H. Robinson Worldwide,,,
+260,Unum Group,,,
+261,Liberty Global,,,
+262,State Street Corp.,,,
+263,EOG Resources,,,
+264,Whole Foods Market,,,
+265,Air Products & Chemicals,,,
+266,Sempra Energy,,,
+267,BB&T Corp.,,,
+268,Mosaic,,,
+269,Automatic Data Processing,,,
+270,CDW,,,
+271,SunTrust Banks,,,
+272,Tenet Healthcare,,,
+273,GameStop,,,
+274,Motorola Solutions,,,
+275,URS,,,
+276,Western Digital,,,
+277,VF,,,
+278,Las Vegas Sands,,,
+279,CarMax,,,
+280,KBR,,,
+281,Visa,,,
+282,Enbridge Energy Partners,,,
+283,BlackRock,,,
+284,NRG Energy,,,
+285,Western Refining,,,
+286,Progress Energy,,,
+287,DTE Energy,,,
+288,Caesars Entertainment,,,
+289,Reinsurance Group of America,,,
+290,Estée Lauder,,,
+291,Micron Technology,,,
+292,AGCO,,,
+293,Sherwin-Williams,,,
+294,Bed Bath & Beyond,,,
+295,Principal Financial,,,
+296,Crown Holdings,,,
+297,Ball,,,
+298,Owens & Minor,,,
+299,Ross Stores,,,
+300,Discover Financial Services,,,
+301,Family Dollar Stores,,,
+302,Reynolds American,,,
+303,Henry Schein,,,
+304,Dover,,,
+305,CenterPoint Energy,,,
+306,Gilead Sciences,,,
+307,Ashland,,,
+308,Stryker,,,
+309,Hertz Global Holdings,,,
+310,Assurant,,,
+311,Kinder Morgan,,,
+312,Energy Transfer Equity,,,
+313,Autoliv,,,
+314,Republic Services,,,
+315,Reliance Steel & Aluminum,,,
+316,Peabody Energy,,,
+317,Great Atlantic & Pacific Tea,,,
+318,W.W. Grainger,,,
+319,Goodrich,,,
+320,AutoZone,,,
+321,Visteon,,,
+322,AECOM Technology,,,
+323,Steel Dynamics,,,
+324,Coca-Cola Enterprises,,,
+325,Williams,,,
+326,Commercial Metals,,,
+327,Hormel Foods,,,
+328,Corning,,,
+329,TravelCenters of America,,,
+330,Sonic Automotive,,,
+331,MGM Resorts International,,,
+332,Thrivent Financial for Lutherans,,,
+333,Becton Dickinson,,,
+334,Campbell Soup,,,
+335,Boston Scientific,,,
+336,Dana Holding,,,
+337,Oshkosh,,,
+338,Masco,,,
+339,Universal Health Services,,,
+340,Ameren,,,
+341,Quest Diagnostics,,,
+342,Darden Restaurants,,,
+343,Regions Financial,,,
+344,Broadcom,,,
+345,Owens-Illinois,,,
+346,Eastman Chemical,,,
+347,Pantry,,,
+348,Cablevision Systems,,,
+349,Dole Food,,,
+350,Tenneco,,,
+351,Charter Communications,,,
+352,Spectrum Group International,,,
+353,Franklin Resources,,,
+354,OfficeMax,,,
+355,BorgWarner,,,
+356,Alpha Natural Resources,,,
+357,Energy Future Holdings,,,
+358,Interpublic Group,,,
+359,DaVita,,,
+360,Barnes & Noble,,,
+361,Targa Resources,,,
+362,Cameron International,,,
+363,Winn-Dixie Stores,,,
+364,Calpine,,,
+365,Ecolab,,,
+366,Cliffs Natural Resources,,,
+367,Avery Dennison,,,
+368,Celanese,,,
+369,NII Holdings,,,
+370,MasterCard,,,
+371,Jarden,,,
+372,Fifth Third Bancorp,,,
+373,Dollar Tree,,,
+374,Weyerhaeuser,,,
+375,Agilent Technologies,,,
+376,Sanmina-SCI,,,
+377,NuStar Energy,,,
+378,Advanced Micro Devices,,,
+379,Terex,,,
+380,CMS Energy,,,
+381,AK Steel Holding,,,
+382,American Family Insurance Group,,,
+383,Dillard's,,,
+384,McGraw-Hill,,,
+385,Amerigroup,,,
+386,Anixter International,,,
+387,Precision Castparts,,,
+388,Mattel,,,
+389,Omnicare,,,
+390,Corn Products International,,,
+391,Symantec,,,
+392,Advance Auto Parts,,,
+393,Core-Mark Holding,,,
+394,CC Media Holdings,,,
+395,Expeditors International of Washington,,,
+396,Mylan,,,
+397,Wesco International,,,
+398,Cognizant Technology Solutions,,,
+399,Consol Energy,,,
+400,PetSmart,,,
+401,WellCare Health Plans,,,
+402,CF Industries Holdings,,,
+403,UGI,,,
+404,Hershey,,,
+405,Group 1 Automotive,,,
+406,MeadWestvaco,,,
+407,Ryder System,,,
+408,Eastman Kodak,,,
+409,NiSource,,,
+410,Rockwell Automation,,,
+411,Mutual of Omaha Insurance,,,
+412,Shaw Group,,,
+413,Harris,,,
+414,Newell Rubbermaid,,,
+415,Pepco Holdings,,,
+416,CBRE Group,,,
+417,Dr Pepper Snapple Group,,,
+418,Avis Budget Group,,,
+419,PVH,,,
+420,Pacific Life,,,
+421,General Cable,,,
+422,Exelis,,,
+423,Health Management Associates,,,
+424,O'Reilly Automotive,,,
+425,Fidelity National Information Services,,,
+426,SLM,,,
+427,Seaboard,,,
+428,Emcor Group,,,
+429,Auto-Owners Insurance,,,
+430,SanDisk,,,
+431,Ralph Lauren,,,
+432,Mohawk Industries,,,
+433,Sealed Air,,,
+434,Starwood Hotels & Resorts,,,
+435,Foot Locker,,,
+436,Domtar,,,
+437,St. Jude Medical,,,
+438,Spectra Energy,,,
+439,Booz Allen Hamilton Holding,,,
+440,CH2M Hill,,,
+441,Kelly Services,,,
+442,Avaya,,,
+443,Laboratory Corp. of America,,,
+444,Kindred Healthcare,,,
+445,Western Union,,,
+446,SPX,,,
+447,NCR,,,
+448,Allergan,,,
+449,Rock-Tenn,,,
+450,Live Nation Entertainment,,,
+451,Graybar Electric,,,
+452,Momentive Specialty Chemicals,,,
+453,Centene,,,
+454,Owens Corning,,,
+455,Catalyst Health Solutions,,,
+456,Clorox,,,
+457,Bemis,,,
+458,Harley-Davidson,,,
+459,Con-way,,,
+460,Insight Enterprises,,,
+461,Pitney Bowes,,,
+462,Wynn Resorts,,,
+463,BrightPoint,,,
+464,Frontier Communications,,,
+465,Gannett,,,
+466,Dick's Sporting Goods,,,
+467,Big Lots,,,
+468,Allegheny Technologies,,,
+469,Telephone & Data Systems,,,
+470,Timken,,,
+471,W.R. Berkley,,,
+472,Fidelity National Financial,,,
+473,Casey's General Stores,,,
+474,NetApp,,,
+475,FMC Technologies,,,
+476,Biogen Idec,,,
+477,CVR Energy,,,
+478,United Stationers,,,
+479,Host Hotels & Resorts,,,
+480,SunGard Data Systems,,,
+481,Meritor,,,
+482,Western & Southern Financial Group,,,
+483,Yahoo,,,
+484,Vanguard Health Systems,,,
+485,Charles Schwab,,,
+486,Susser Holdings,,,
+487,YRC Worldwide,,,
+488,El Paso,,,
+489,CIT Group,,,
+490,MetroPCS Communications,,,
+491,Alliant Techsystems,,,
+492,Celgene,,,
+493,MRC Global,,,
+494,Aleris,,,
+495,J.M. Smucker,,,
+496,Rockwell Collins,,,
+497,Erie Insurance Group,,,
+498,Nash-Finch,,,
+499,KeyCorp,,,
+500,Molina Healthcare,,,
