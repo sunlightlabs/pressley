@@ -10,5 +10,10 @@ The relevant management commands are
 ./manage.py scrape_releases
 
 
+to-dos:
+
+-add posting to SFM api, SFM frontend mysql db
+-add django piston to turn into API
+-port congress leadership scraper, add nonprofits/thinktanks
 
 
