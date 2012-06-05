@@ -13,7 +13,7 @@ class Source(models.Model):
     source_type = models.IntegerField(choices=SOURCE_TYPE_CHOICES)
     organization = models.TextField(null=False)
     url = models.TextField(null=False)
-    
+    last_retrieved = models.DateTimeField(null=True)    
 
 
 
