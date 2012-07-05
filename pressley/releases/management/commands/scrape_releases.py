@@ -55,7 +55,7 @@ class Command(BaseCommand):
                         release = Release.objects.get_or_create(url=link, title=title, date=date, body=body, source=source)[0]
 
                         #add to superfastmatch
-                        response = sfm.add(SUPERFASTMATCH['default']['doctype'], release.id, body, title=title, date=date, source=source.organization)
+                        response = sfm.add(source.doc_type or SUPERFASTMATCH['default']['doctype'], release.id, body, title=title, date=date, source=source.organization)
                         print response 
 
                         #update last retrieved for this source

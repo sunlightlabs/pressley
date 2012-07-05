@@ -10,6 +10,12 @@ class Command(BaseCommand):
         try:
             reader = csv.reader(open(args[0]))
             logger = csv.writer(open('source_errors.log', 'a'))
+            
+            if len(args) > 1:
+                doc_type = args[1]
+            else:
+                doc_type = None
+
             for line in reader:
                 try:
                     organization = line[1]
@@ -19,19 +25,19 @@ class Command(BaseCommand):
                         if rss_.strip() == 'Y':
                             source_type = 2 
                             url = line[4]
-                            obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type) 
+                            obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type, doc_type=doc_type)
 
                         elif rss_.strip() == 'N':
                             source_type = 3
                             url = line[4]
-                            obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type) 
+                            obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type, doc_type=doc_type) 
 
                         elif rss_.strip() == 'M':
 
                             for u in line[4:]:
                                 url = u
                                 source_type = 2
-                                obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type) 
+                                obj, created = Source.objects.get_or_create(organization=organization.strip(), url=url, source_type=source_type, doc_type=doc_type) 
 
                         else:
                             logger.writerow(line)
