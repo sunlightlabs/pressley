@@ -121,7 +121,7 @@ class CongressLeadership(object):
 
         page = html.fromstring(response.content)
         page.make_links_absolute(self.urls[1])
-        link_list = page.get_element_by_id('recent_news_2').get_element_by_id('news_text').iterlinks()
+        link_list = page.find_class('span6')[0].iterlinks()
         page_count = 1
 
         self.links = []
@@ -304,7 +304,7 @@ class Command(BaseCommand):
                 doc = scraper.extract(link)
                 
                 #store in database 
-                (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3, url=scraper.links[index])
+                (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3)
                 (release, created) = Release.objects.get_or_create(url=link, source=source, title=doc['title'], body=doc['text'], date=doc['date'])
 
                 #add to superfastmatch, using database id

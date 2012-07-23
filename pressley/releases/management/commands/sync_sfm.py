@@ -10,9 +10,20 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default']['url'])
+        servers = SUPERFASTMATCH['default']
+        post_servers = []
+        for s in servers:
+            sfm = superfastmatch.Client(url=s['url'])
+            post_servers.append((sfm, s['doctype']))
+
+        
         releases = Release.objects.all()
         for r in releases:
-            response = sfm.add(r.source.doc_type or SUPERFASTMATCH['default']['doctype'], r.id, r.body, title=r.title, date=r.date, source=r.source.organization)
-            print response
+            for ps in post_servers:
+                try:
+                    response = ps[0].add(r.source.doc_type or ps[1], r.id, r.body, title=r.title, date=r.date, source=r.source.organization)
+                    print response
+                except superfastmatch.SuperFastMatchError as e:
+                    print "could not add document %s with doctype %s to sfm" % (r.id, r.source.doc_type)
+
     
