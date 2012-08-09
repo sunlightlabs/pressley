@@ -10,6 +10,8 @@ import requests
 import superfastmatch
 from settings import SUPERFASTMATCH
 
+
+
 class Command(BaseCommand):
     args = '<none>'
     help = "Scrapes rss feeds in database for releases"
@@ -26,7 +28,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default']['url'])
+        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default'][0]['url'])
           
         sources = Source.objects.filter(source_type=2)
 
@@ -51,16 +53,33 @@ class Command(BaseCommand):
                                 date = datetime.now()
                                 
                         link = item.find('link').text
-                        body = self.get_link_content(link)
-                        release = Release.objects.get_or_create(url=link, title=title, date=date, body=body, source=source)[0]
+                        if link[-4:].lower() != ".pdf":
+                            body = self.get_link_content(link)
+                            release = Release.objects.get_or_create(url=link, title=title, date=date, body=body, source=source)[0]
 
-                        #add to superfastmatch
-                        response = sfm.add(source.doc_type or SUPERFASTMATCH['default']['doctype'], release.id, body, title=title, date=date, source=source.organization)
-                        print response 
+                            #add to superfastmatch
+                            response = None
+                            try:
+                                response = sfm.add(source.doc_type or SUPERFASTMATCH['default'][0]['doctype'], release.id, body, True, title=title, date=date, source=source.organization, put=False)
+                                print response 
+                                #update last retrieved for this source
+                                source.last_retrieved = datetime.now()
+                                source.save()
+                            except superfastmatch.SuperFastMatchError as e:
+                                if e.status == 200:
+                                    print response 
+                                    #update last retrieved for this source
+                                    source.last_retrieved = datetime.now()
+                                    source.save()
+                                else:
+                                    print "=================================================================="
+                                    print "Problem parsing %s "  % source.url
+                                    print e
+                                    print "=================================================================="
+                        else:
+                            print "Could not store %s - item is a pdf" % link
 
-                        #update last retrieved for this source
-                        source.last_retrieved = datetime.now()
-                        source.save()
+
                 except Exception as e: 
                     print "=================================================================="
                     print "Problem parsing %s "  % source.url
