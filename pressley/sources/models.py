@@ -14,7 +14,7 @@ class Source(models.Model):
     doc_type = models.IntegerField(null=True)
     organization = models.TextField(null=False)
     url = models.TextField(null=False)
-    last_retrieved = models.DateTimeField(null=True)    
+    last_retrieved = models.DateTimeField(null=True, blank=True)
 
 
 
