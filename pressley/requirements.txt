@@ -20,3 +20,4 @@ six==1.1.0
 stream==0.8
 uWSGI==1.2.4
 wsgiref==0.1.2
+feedparser==5.1.2

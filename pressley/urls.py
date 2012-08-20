@@ -5,7 +5,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^api/', include('api.urls')),
+    url(r'^status/', 'sources.views.status_list'),
+    url(r'^source/(?P<source_id>\d+)/', 'sources.views.source_history', name="source-history"),
+
     # Examples:
     # url(r'^$', 'pressley.views.home', name='home'),
     # url(r'^pressley/', include('pressley.foo.urls')),
