@@ -11,6 +11,7 @@ from util import condense_whitespace
 import dateutil.parser
 import requests
 import superfastmatch
+from util import readability_extract
 from now import now
 from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings
@@ -25,10 +26,13 @@ def kill_control_characters(s):
     return s.translate(control_characters)
 
 def get_link_content(link):
+    # content :: str
     content = requests.get(link).content
-    readable = Document(content)
-    body = html.fromstring(readable.summary()).text_content()
-    return kill_control_characters(condense_whitespace(body))
+    (title, body) = readability_extract(content)
+    #readable = Document(content)
+    # body :: lxml.etree._ElementUnicodeResult
+    #body = html.fromstring(readable.summary()).text_content()
+    return kill_control_characters(body)
 
 def safely_format_traceback((exc_type, exc_value, exc_traceback)):
     try:
@@ -51,7 +55,7 @@ class Command(BaseCommand):
                 logging.warn("Skipping PDF link: {0}".format(link))
                 continue
 
-            title = entry.get('title')
+            title = kill_control_characters(entry.get('title'))
             date = dateutil.parser.parse(entry.get('published') or
                                          entry.get('updated') or
                                          entry.get('a10:updated') or
