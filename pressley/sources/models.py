@@ -6,8 +6,6 @@ from now import now
 from django.db import models
 from django.conf import settings
 
-# Create your models here.
-
 class Source(models.Model):
 
     SOURCE_TYPE_CHOICES = (
@@ -19,9 +17,12 @@ class Source(models.Model):
     source_type = models.IntegerField(choices=SOURCE_TYPE_CHOICES)
     doc_type = models.IntegerField(null=True)
     organization = models.TextField(null=False)
-    url = models.TextField(null=False)
+    url = models.TextField(null=False, unique=True)
     last_retrieved = models.DateTimeField(null=True, blank=True)
     last_failure = models.OneToOneField('SourceScrapeFailure', null=True, blank=True, related_name='failed_source')
+
+    class Meta:
+        ordering = ['organization']
 
     def is_stale(self, seconds=None):
         seconds = seconds or settings.SCRAPE_PERIOD
@@ -51,11 +52,19 @@ class Source(models.Model):
 
         return feedparser.parse(response.text)
 
+    def save(self, *args, **kwargs):
+        super(Source, self).save(*args, **kwargs)
+        if self.last_failure is None:
+            failures = self.scrape_failures.filter(resolved__isnull=True)
+            for f in failures:
+                f.resolved = now()
+                f.save()
+
     def is_failing(self):
         return self.scrape_failures.filter(resolved__isnull=True).count() > 0
 
     def __unicode__(self):
-        return u"<Source {0}>".format(self.url)
+        return u"{0.organization}".format(self)
 
 class SourceScrapeFailure(models.Model, Exception):
 
@@ -65,6 +74,7 @@ class SourceScrapeFailure(models.Model, Exception):
     http_headers = models.TextField(null=True)
     http_body = models.TextField(null=True, blank=True)
 
+    traceback = models.TextField(null=True, blank=True)
     description = models.CharField(max_length=255, null=True, blank=True)
 
     timestamp = models.DateTimeField(auto_now_add=True)

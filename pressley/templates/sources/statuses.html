@@ -44,6 +44,10 @@
                 <span class="label">HTTP Body:</span>
                 <div>{{ f.last_failure.http_body }}</div>
             </div>
+            <div>
+                <span class="label">Stacktrace:</span>
+                <div> {{ f.last_failure.traceback|linebreaksbr }} </div>
+            </div>
         </div>
         <div class="clear"></div>
     </div>

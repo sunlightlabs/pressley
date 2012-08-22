@@ -1,4 +1,6 @@
+import sys
 import logging
+from traceback import format_tb
 from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
 from sources.models import Source, SourceScrapeFailure
@@ -14,14 +16,30 @@ from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings
 
 
+control_characters = dict.fromkeys(range(32))
+control_characters['\t'] = '\t'
+control_characters['\n'] = '\n'
+control_characters['\r'] = '\r'
+control_characters[127] = None
+def kill_control_characters(s):
+    return s.translate(control_characters)
+
 def get_link_content(link):
     content = requests.get(link).content
     readable = Document(content)
     body = html.fromstring(readable.summary()).text_content()
-    return condense_whitespace(body)
+    return kill_control_characters(condense_whitespace(body))
+
+def safely_format_traceback((exc_type, exc_value, exc_traceback)):
+    try:
+        return format_tb(exc_traceback)
+    finally:
+        del exc_type
+        del exc_value
+        del exc_traceback
 
 class Command(BaseCommand):
-    args = '<none>'
+    args = ''
     help = "Scrapes rss feeds in database for releases"
 
     def scrape_releases(self, source):
@@ -38,34 +56,23 @@ class Command(BaseCommand):
                                          entry.get('updated') or
                                          entry.get('a10:updated') or
                                          now())
-            source_name = source.organization
             body = get_link_content(link)
 
-            (release, created) = Release.objects.get_or_create(url=link,
-                                                               title=title,
-                                                               date=date,
-                                                               body=body,
-                                                               source=source)
-            if body is None or len(body.strip()) == 0:
-                continue
-
             try:
-                result = self.sfm.add(doctype=source.doc_type or settings.DEFAULT_DOCTYPE,
-                                      docid=release.id,
-                                      text=body,
-                                      defer=True,
-                                      source=source_name,
-                                      date=date,
-                                      title=title,
-                                      put=False)
-            except superfastmatch.SuperFastMatchError as e:
-                raise SourceScrapeFailure(source=source, description=unicode(e))
-
-            if result['success'] != True:
-                msg = 'Superfastmatch failure: {0}'.format(result.get('error', ''))
-                raise SourceScrapeFailure(source,
-                                          description=msg)
-
+                # Does not use get_or_create because the unique constraint is just the url
+                # and we don't want the source foreign key field to ever be null.
+                release = Release.objects.get(url=link)
+                release.title = title
+                release.date = date
+                release.body = body
+                release.source = source
+                release.save()
+            except Release.DoesNotExist:
+                release = Release.objects.create(url=link,
+                                                 source=source,
+                                                 title=title,
+                                                 date=date,
+                                                 body=body)
 
     def handle(self, *args, **kwargs):
         if not hasattr(settings, 'SUPERFASTMATCH'):
@@ -77,25 +84,31 @@ class Command(BaseCommand):
         self.sfm = from_django_conf()
 
         sources = Source.objects.filter(source_type=2)
+        if len(args) == 1:
+            arg = args[0]
+            if arg.startswith('http://') or arg.startswith('https://'):
+                sources = sources.filter(url=arg)
+            else:
+                try:
+                    sources = sources.filter(id=int(arg))
+                except ValueError:
+                    raise CommandError("Arguments must be source IDs or feed URLs")
 
         for source in sources:
             try:
                 if source.is_stale():
                     self.scrape_releases(source)
                     source.last_retrieved = now()
+                    source.last_failure = None
                     source.save()
-
-                    failures = SourceScrapeFailure.objects.filter(resolved__isnull=True,
-                                                                  source=source)
-                    for f in failures:
-                        f.resolved = now()
-                        f.save()
 
             except SourceScrapeFailure as failure:
                 failure.save()
 
             except Exception as e:
+                formatted_traceback = safely_format_traceback(sys.exc_info())
                 failure = SourceScrapeFailure.objects.create(source=source,
+                                                             traceback=formatted_traceback,
                                                              description=unicode(e))
 
 

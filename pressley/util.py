@@ -2,17 +2,17 @@ import re
 import lxml.html
 from readability import readability
 
-CONDENSE_WHITESPACE = re.compile('[^\S\n]+', re.UNICODE)
-CONDENSE_NEWLINES = re.compile('\s*\n+\s*', re.UNICODE)
+CONDENSE_WHITESPACE = re.compile(ur'[^\S\n]+', re.UNICODE)
+CONDENSE_NEWLINES = re.compile(ur'\s*\n+\s*', re.UNICODE)
 
 
 def condense_whitespace(string):
     
     #condense all whitespace (except newlines) to a single space
-    string = re.sub(CONDENSE_WHITESPACE, ' ', string)
+    string = re.sub(CONDENSE_WHITESPACE, u' ', string)
 
     #combine multiple newlines into one
-    string = re.sub(CONDENSE_NEWLINES, '\n', string)
+    string = re.sub(CONDENSE_NEWLINES, u'\n', string)
 
     return string
 
