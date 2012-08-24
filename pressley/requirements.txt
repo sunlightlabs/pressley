@@ -21,3 +21,4 @@ stream==0.8
 uWSGI==1.2.4
 wsgiref==0.1.2
 progressbar==2.3
+pytz==2012d
