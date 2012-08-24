@@ -1,0 +1,57 @@
+
+body {
+    background-color: #fafafa;
+}
+
+.clear {
+    clear: both;
+}
+
+span.label {
+    font-weight: bold;
+}
+
+div.http-header-row {
+    margin: 0 0 0 4em;
+}
+
+div.row-like {
+    clear: both;
+}
+
+div.even-row {
+    background-color: #fafafa;
+}
+
+div.odd-row {
+    background-color: #ddd;
+}
+
+ul.row-like li {
+    display: inline-block;
+    float: left;
+    list-style-type: none;
+}
+
+ul#fail-col-names li {
+    width: 20%;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+ul.fail-row li {
+    width:  20%;
+    font-size: 14px;
+}
+
+div.fail-detail-container {
+    padding: 0 0 0 5em;
+}
+
+a.expand-button {
+    float: left;
+}
+
+.expand-button span.ui-button-text {
+    padding: 0.1em 0.1em;
+}
