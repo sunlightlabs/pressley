@@ -33,17 +33,21 @@ class Command(BaseCommand):
                                 chunksize=1000,
                                 fetch_text=False)
 
-        for doc in docs:
-            try:
-                release = Release.objects.get(id=doc['docid'])
-                doctype = release.source.doc_type or settings.DEFAULT_DOCTYPE
-                if doctype != doc['doctype']:
-                    logging.warning("Doctype mismatch for document ({0[doctype]},{0[docid]}) and release #{1.id} (source: {1.source}, doctype: {2}).".format(doc, release, doctype))
+        try:
+            for doc in docs:
+                try:
+                    release = Release.objects.get(id=doc['docid'])
+                    doctype = release.source.doc_type or settings.DEFAULT_DOCTYPE
+                    if doctype != doc['doctype']:
+                        logging.warning("Doctype mismatch for document ({0[doctype]},{0[docid]}) and release #{1.id} (source: {1.source}, doctype: {2}).".format(doc, release, doctype))
 
-            except Release.DoesNotExist:
-                if options['dry_run'] == False:
-                    sfm.delete(doc['doctype'], doc['docid'])
-                    logging.warning("Deleting document ({0[doctype]},{0[docid]}) because there is no corresponding press release.".format(doc))
-                else:
-                    logging.warning("Document ({0[doctype]},{0[docid]}) does not have a corresponding press release.".format(doc)) 
+                except Release.DoesNotExist:
+                    if options['dry_run'] == False:
+                        sfm.delete(doc['doctype'], doc['docid'])
+                        logging.warning("Deleting document ({0[doctype]},{0[docid]}) because there is no corresponding press release.".format(doc))
+                    else:
+                        logging.warning("Document ({0[doctype]},{0[docid]}) does not have a corresponding press release.".format(doc)) 
+
+        except ValueError:
+            logging.error("Failed on document {0},{1}".format(doc['doctype'], doc['docid']))
 

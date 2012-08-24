@@ -1,50 +1,39 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import logging
-from traceback import format_tb
+from traceback import print_exc
 from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
 from sources.models import Source, SourceScrapeFailure
 from readability.readability import Document
 from lxml import html
+from optparse import make_option
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 import datetime
-from util import condense_whitespace
 import dateutil.parser
 import requests
 import superfastmatch
-from util import readability_extract
+from util import readability_extract, kill_control_characters
 from now import now
+from releases.scrape import scrape_release
 from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings
 
 
-control_characters = dict.fromkeys(range(32))
-control_characters['\t'] = '\t'
-control_characters['\n'] = '\n'
-control_characters['\r'] = '\r'
-control_characters[127] = None
-def kill_control_characters(s):
-    return s.translate(control_characters)
-
-def get_link_content(link):
-    # content :: str
-    content = requests.get(link).content
-    (title, body) = readability_extract(content)
-    #readable = Document(content)
-    # body :: lxml.etree._ElementUnicodeResult
-    #body = html.fromstring(readable.summary()).text_content()
-    return kill_control_characters(body)
-
-def safely_format_traceback((exc_type, exc_value, exc_traceback)):
-    try:
-        return format_tb(exc_traceback)
-    finally:
-        del exc_type
-        del exc_value
-        del exc_traceback
-
 class Command(BaseCommand):
     args = ''
     help = "Scrapes rss feeds in database for releases"
+    option_list = BaseCommand.option_list + (
+        make_option('--including-stale',
+                    action='store_true',
+                    dest='including_stale',
+                    default=False,
+                    help='Don\'t skip recently-retrieved sources.'),
+    )
 
     def scrape_releases(self, source):
         feed = source.fetch_feed()
@@ -55,30 +44,10 @@ class Command(BaseCommand):
                 logging.warn("Skipping PDF link: {0}".format(link))
                 continue
 
-            title = kill_control_characters(entry.get('title'))
-            date = dateutil.parser.parse(entry.get('published') or
-                                         entry.get('updated') or
-                                         entry.get('a10:updated') or
-                                         now())
-            body = get_link_content(link)
+            scrape_release(source, feed, entry, link)
 
-            try:
-                # Does not use get_or_create because the unique constraint is just the url
-                # and we don't want the source foreign key field to ever be null.
-                release = Release.objects.get(url=link)
-                release.title = title
-                release.date = date
-                release.body = body
-                release.source = source
-                release.save()
-            except Release.DoesNotExist:
-                release = Release.objects.create(url=link,
-                                                 source=source,
-                                                 title=title,
-                                                 date=date,
-                                                 body=body)
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **options):
         if not hasattr(settings, 'SUPERFASTMATCH'):
             raise CommandError('You must configure SUPERFASTMATCH in your project settings.')
 
@@ -100,7 +69,7 @@ class Command(BaseCommand):
 
         for source in sources:
             try:
-                if source.is_stale():
+                if source.is_stale() or options['including_stale']:
                     self.scrape_releases(source)
                     source.last_retrieved = now()
                     source.last_failure = None
@@ -110,9 +79,10 @@ class Command(BaseCommand):
                 failure.save()
 
             except Exception as e:
-                formatted_traceback = safely_format_traceback(sys.exc_info())
+                buf = StringIO()
+                print_exc(1000, buf)
                 failure = SourceScrapeFailure.objects.create(source=source,
-                                                             traceback=formatted_traceback,
+                                                             traceback=buf.getvalue(),
                                                              description=unicode(e))
 
 

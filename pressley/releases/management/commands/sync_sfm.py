@@ -1,7 +1,9 @@
 import os
 import json
+import datetime
 import logging
 import dateutil.parser
+import progressbar
 from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
 from django.conf import settings
@@ -36,13 +38,14 @@ class Command(BaseCommand):
         self.starttime = now()
         if not os.path.exists(CheckpointPath):
             self.checkpoint = {
-                'timestamp': now()
+                'timestamp': datetime.datetime(1970, 1, 1, 00, 00, 00)
             }
+            logging.info("Never run before, syncing all releases.")
         else:
             with file(CheckpointPath, 'r') as checkpoint_file:
                 self.checkpoint = json.load(checkpoint_file)
                 self.checkpoint['timestamp'] = dateutil.parser.parse(self.checkpoint['timestamp'])
-        logging.info("Last run: {0}".format(self.checkpoint['timestamp']))
+            logging.info("Timestamp of last release posted: {0}".format(self.checkpoint['timestamp'].isoformat()))
 
     def write_checkpoint(self):
         """
@@ -62,12 +65,17 @@ class Command(BaseCommand):
         if not hasattr(settings, 'DEFAULT_DOCTYPE'):
             raise CommandError('You must specify a DEFAULT_DOCTYPE in your project settings.')
 
+        if len(args) > 0 and options['all'] == True:
+            raise CommandError('You cannot specify release IDs in conjunction with the --all option.')
+
         self.sfm = from_django_conf()
 
-        self.read_checkpoint()
+        use_checkpoint = len(args) == 0 and options['all'] == False
+        if use_checkpoint:
+            self.read_checkpoint()
 
         if len(args) == 0:
-            releases = Release.objects.order_by('-created', 'id')
+            releases = Release.objects.order_by('updated', 'id')
             if options['all'] == False:
                 releases = Release.objects.filter(updated__gte=self.checkpoint['timestamp'])
         else:
@@ -77,14 +85,32 @@ class Command(BaseCommand):
             except ValueError:
                 raise CommandError("All release ids must be integers.")
 
-        logging.info("Synchronizing {0} releases".format(len(releases)))
-        if Release.objects.count() > 0:
-            logging.info("Most recent press release: {0}".format(Release.objects.order_by('-updated')[0].updated))
-        for r in releases:
-            doctype = r.source.doc_type or settings.DEFAULT_DOCTYPE
-            post_release_to_superfastmatch(r, self.sfm, doctype)
+        logging.info("Synchronizing {0} press releases".format(len(releases)))
+        release_count = releases.count()
+        if release_count == 0:
+            return
 
-        self.write_checkpoint()
+        try:
+            progress = progressbar.ProgressBar(maxval=release_count,
+                                               widgets=[
+                                                   progressbar.widgets.AnimatedMarker(),
+                                                   '  ',
+                                                   progressbar.widgets.Counter(),
+                                                   '/{0}  '.format(release_count),
+                                                   progressbar.widgets.Percentage(),
+                                                   '  ',
+                                                   progressbar.widgets.ETA(),
+                                               ])
+            progress.start()
+
+            for r in progress(releases):
+                doctype = r.source.doc_type or settings.DEFAULT_DOCTYPE
+                post_release_to_superfastmatch(r, self.sfm, doctype)
+                if use_checkpoint:
+                    self.checkpoint['timestamp'] = r.updated
+        finally:
+            if use_checkpoint:
+                self.write_checkpoint()
 
 
     

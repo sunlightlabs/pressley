@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re
 import lxml.html
 from readability import readability
@@ -19,11 +21,12 @@ def condense_whitespace(string):
 
 def readability_extract(response):
     """Takes an HTML string and returns text as (title, body)"""
-#    f = response.encode('utf-8', 'ignore')
     doc = readability.Document(response)
-    title_text = lxml.html.fromstring(doc.short_title()).text_content()
+    title_text = unicode(lxml.html.fromstring(doc.short_title()).text_content())
+    title_text = kill_control_characters(title_text)
     body_text = render_text(lxml.html.fromstring(doc.summary()))
     body_text = standardize_quotes(body_text, "'", "'", '"', '"')
+    body_text = kill_control_characters(body_text)
     return (condense_whitespace(title_text), condense_whitespace(body_text))
 
 html_tags = set(['a', 'abbr', 'address', 'area', 'article', 'aside',
@@ -55,6 +58,11 @@ def replace_nonstandard_tags(document):
     for e in document.iterdescendants():
         if not callable(e.tag) and e.tag not in html_tags:
             e.tag = 'span'
+
+control_characters = dict.fromkeys(range(32))
+control_characters.update([(10, 10), (13, 13), (127, None)])
+def kill_control_characters(s):
+    return s.translate(control_characters)
 
 RELeftSingleQuotes = re.compile(ur'[\u2018\u201B]', re.UNICODE)
 RERightSingleQuotes = re.compile(ur'[\u2019\u201A]', re.UNICODE)
