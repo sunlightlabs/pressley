@@ -16,6 +16,10 @@ def get_link_content(link):
         logging.warn("Skipping PDF link: {0}".format(link))
         return None
 
+    if len(response.content) == 0:
+        logging.warn("Server returned an empty body: {0}".format(link))
+        return None
+
     (title, body) = readability_extract(response.content)
     return kill_control_characters(body)
 
