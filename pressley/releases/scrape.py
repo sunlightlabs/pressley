@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import logging
 import dateutil.parser
 from util import kill_control_characters, readability_extract
 from now import now
@@ -10,6 +11,10 @@ def get_link_content(link):
     response = requests.get(link)
     if response.status_code != 200:
         raise Exception("Unable to fetch release content: {0}".format(link))
+
+    if response.headers.get('content-type') in ('application/pdf', 'application/x-pdf'):
+        logging.warn("Skipping PDF link: {0}".format(link))
+        return None
 
     (title, body) = readability_extract(response.content)
     return kill_control_characters(body)
@@ -24,6 +29,8 @@ def scrape_release(source, feed, entry, link):
                  entry.get('a10:updated'))
     date = dateutil.parser.parse(date_text) if date_text else now()
     body = get_link_content(link)
+    if body is None:
+        return
 
     try:
         # Does not use get_or_create because the unique constraint is just the url
