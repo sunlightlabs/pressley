@@ -22,8 +22,12 @@ def condense_whitespace(string):
 def readability_extract(response):
     """Takes an HTML string and returns text as (title, body)"""
     doc = readability.Document(response)
-    title_text = unicode(lxml.html.fromstring(doc.short_title()).text_content())
-    title_text = kill_control_characters(title_text)
+    title_markup = doc.short_title()
+    if title_markup:
+        title_text = unicode(lxml.html.fromstring(title_markup).text_content())
+        title_text = kill_control_characters(title_text)
+    else:
+        title_text = ''
     body_text = render_text(lxml.html.fromstring(doc.summary()))
     body_text = standardize_quotes(body_text, "'", "'", '"', '"')
     body_text = kill_control_characters(body_text)
