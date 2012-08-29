@@ -8,12 +8,16 @@ from now import now
 from releases.models import Release
 
 def get_link_content(link):
-    response = requests.get(link)
-    if response.status_code != 200:
-        raise Exception("Unable to fetch release content: {0}".format(link))
+    try:
+        response = requests.get(link)
+        if response.status_code != 200:
+            raise Exception("Unable to fetch release content: {0}".format(link))
+    except requests.exceptions.InvalidURL as e:
+        logging.warn("Invalid link: {0}".format(link))
+        return None
 
-    if response.headers.get('content-type') in ('application/pdf', 'application/x-pdf'):
-        logging.warn("Skipping PDF link: {0}".format(link))
+    if response.headers.get('content-type') not in ('text/html', 'text/xhtml'):
+        logging.warn("Skipping non-HTML link: {0}".format(link))
         return None
 
     if len(response.content) == 0:
