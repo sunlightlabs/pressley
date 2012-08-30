@@ -1,0 +1,37 @@
+{% extends "sources/base.html" %}
+
+{% block body-class %}source-history{% endblock %}
+
+{% block body %}
+<h1>{{ source.organization }}</h1>
+<div><span class="label">Feed URL:</span> <span><a href="{{ source.url }}">{{ source.url }}</a></span></div>
+<div><span class="label">Last Retrieved:</span> <span>{{ f.last_retrieved }}</span></div>
+
+<div id="fail-container">
+    <div id="fail-header" class="row-like">
+        <ul id="fail-col-names" class="row-like">
+            <li>Timestamp</li>
+            <li>Resolved</li>
+            <li>Problem</li>
+            <li>&nbsp;</li>
+        </ul>
+    </div>
+    {% for f in failures %}
+    <div class="row-like {% cycle 'even' 'odd' %}-row">
+        <ul class="row-like fail-row">
+            <li>{{ f.timestamp }}</li>
+            <li>{{ f.resolved }}</li>
+            <li>{{ f.description }}{% if f.http_status or f.http_body %}: {{ f.http_status }}{% endif %}
+            </li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block js-extra %}
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/history.js"></script>
+{% endblock %}
+

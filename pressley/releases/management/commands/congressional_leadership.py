@@ -121,7 +121,7 @@ class CongressLeadership(object):
 
         page = html.fromstring(response.content)
         page.make_links_absolute(self.urls[1])
-        link_list = page.get_element_by_id('recent_news_2').get_element_by_id('news_text').iterlinks()
+        link_list = page.find_class('span6')[0].iterlinks()
         page_count = 1
 
         self.links = []
@@ -279,7 +279,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default']['url'])
+        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default'][0]['url'])
 
         for index in [0,1,2,3,4,5,6,7]:
             scraper = CongressLeadership(index)
@@ -304,12 +304,21 @@ class Command(BaseCommand):
                 doc = scraper.extract(link)
                 
                 #store in database 
-                (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3, url=scraper.links[index])
+                (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3)
                 (release, created) = Release.objects.get_or_create(url=link, source=source, title=doc['title'], body=doc['text'], date=doc['date'])
 
-                #add to superfastmatch, using database id
-                resp = sfm.add(self.doctype, release.id, doc['text'], title=doc['title'], source=source.organization, url=link)
-                print resp
+       		resp = None
+   
+        	try:
+                    #add to superfastmatch, using database id
+                    resp = sfm.add(self.doctype, release.id, doc['text'], True, title=doc['title'], source=source.organization, url=link, date=doc['date'], put=False)
+                    print resp
+
+                except superfastmatch.SuperFastMatchError as e:
+                    if e.status == 200:
+                        print e
+                    else:
+                        print "Problem parsing and posting " + link
 
 
 

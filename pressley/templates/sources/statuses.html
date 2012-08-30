@@ -1,0 +1,59 @@
+{% extends "sources/base.html" %}
+
+{% block body-class %}status{% endblock %}
+
+{% block body %}
+{% if failed_row_count == 0 %}
+
+<h1>All OK</h1>
+
+{% else %}
+
+<h1>Failures</h1>
+<div id="fail-container">
+    <div id="fail-header" class="row-like">
+        <a>&nbsp;</a>
+        <ul id="fail-col-names" class="row-like">
+            <li>Organization</li>
+            <li>Failure</li>
+            <li>Last OK</li>
+            <li>Problem</li>
+        </ul>
+    </div>
+    {% for f in failed_rows %}
+    <div class="row-like {% cycle 'even' 'odd' %}-row">
+        <a class="expand-button">+</a>
+        <ul class="row-like fail-row">
+            <li><a href="{% url source-history f.id %}">{{ f.organization }}</a></li>
+            <li>{{ f.last_failure.timestamp }}</li>
+            <li>{{ f.last_retrieved }}</li>
+            <li>{{ f.last_failure.description }}</li>
+        </ul>
+        <div class="fail-detail-container row-like" style="display: none;">
+            <div>
+                <span class="label">HTTP Status:</span>
+                {{ f.last_failure.http_status }}
+            </div>
+            <div>
+                <span class="label">HTTP Headers:</span>
+                {% for h, v in f.last_failure.decoded_headers.items %}
+                <div class="http-header-row"><span class="label">{{ h }}:</span> <span>{{ v }}</span></div>
+                {% endfor %}
+            </div>
+            <div>
+                <span class="label">HTTP Body:</span>
+                <div>{{ f.last_failure.http_body }}</div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block js-extra %}
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/status.js"></script>
+{% endblock %}
+
