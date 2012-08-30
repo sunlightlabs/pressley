@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 import re
 import logging
 from StringIO import StringIO
@@ -66,14 +66,11 @@ class CongressLeadership(object):
         return parse(self.dates[self.links.index(link)])
 
     def parse_speaker_date(self, date_text, response, link):
-        text = html.fromstring(date_text).xpath('//b')
-        date = datetime.today()
-
-        for t in text:
-            matches = re.findall('((Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)+(\s*\d+)(,\s*\d{4})*)', t.text_content())
-            if matches:
-                date = parse(matches[0][0])
-
+        try:
+            text = html.fromstring(response).find_class("date")[0].text_content()
+            date = parse(text)
+        except Exception as e:
+            date = datetime.today()
         return date
     
 
@@ -324,6 +321,7 @@ class Command(BaseCommand):
                                           date=doc['date'],
                                           source=source)
                         release.save()
+                        print "saved release %s" % link
 
                 except Exception as e:
                     print e
