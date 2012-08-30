@@ -307,11 +307,12 @@ class Command(BaseCommand):
                 (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3)
                 (release, created) = Release.objects.get_or_create(url=link, source=source, title=doc['title'], body=doc['text'], date=doc['date'])
 
-       		resp = None
+                resp = None
    
-        	try:
+            	try:
                     #add to superfastmatch, using database id
-                    resp = sfm.add(self.doctype, release.id, doc['text'], True, title=doc['title'], source=source.organization, url=link, date=doc['date'], put=False)
+                    resp = sfm.add(self.doctype, release.id, doc['text'], True, title=doc['title'], source=source.organization, url=link, date=doc['date'], put=False, accepted_codes=[200, 202])
+                    print link
                     print resp
 
                 except superfastmatch.SuperFastMatchError as e:
