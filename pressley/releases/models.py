@@ -4,7 +4,7 @@ class Release(models.Model):
 
     source = models.ForeignKey('sources.Source')
     date = models.DateField(auto_now=False, null=False)
-    url = models.TextField(null=False, unique=True)
+    url = models.URLField(null=False, unique=True, max_length=512)
     title = models.TextField()
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True, null=True)

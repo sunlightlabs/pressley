@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import re
 import logging
+from StringIO import StringIO
+from traceback import print_exc
 import time
 import httplib
 from optparse import OptionParser
@@ -13,16 +15,14 @@ from datetime import datetime
 import requests
 import feedparser
 
-from settings import SUPERFASTMATCH
 from util import readability_extract, condense_whitespace
-import superfastmatch
 from releases.models import Release
-from sources.models import Source
+from sources.models import Source, SourceScrapeFailure
  
 
 
 class CongressLeadership(object):
-    urls = ['http://www.speaker.gov/News/DocumentQuery.aspx?DocumentTypeID=689',
+    urls = ['http://www.speaker.gov/blog/press-releases',
             'http://majorityleader.gov/Newsroom/',
             'http://www.democraticleader.gov/news/press',
             'http://www.democraticwhip.gov/newsroom/press-releases',
@@ -89,7 +89,7 @@ class CongressLeadership(object):
 
         page = html.fromstring(response.content)
         page.make_links_absolute(self.urls[0])
-        link_list = page.find_class('middlelinks')
+        link_list = page.get_element_by_id('inner-content').xpath("//span[@class='field-content']/a")
         page_count = 1
         self.links = []
 
@@ -100,17 +100,18 @@ class CongressLeadership(object):
                 if link not in self.links:
                     self.links.append(link)
 
-            page_count += 1 
-            response = requests.get(self.urls[0] + '&Page=%s' % page_count)
+            response = requests.get(self.urls[0] + '?page=%s' % page_count)
             if response.status_code == httplib.OK:
                 page = html.fromstring(response.content)
 
                 page.make_links_absolute(self.urls[0])
-                link_list = page.find_class('middlelinks')
+                link_list = page.get_element_by_id('inner-content').xpath("//span[@class='field-content']/a")
                 
                 #need different helper functions for each member of leadership
                 self.extra['leader'] = leader         
 
+            page_count += 1
+             
     def get_house_majority_leader_links(self, leader):
 
         response = requests.get(self.urls[self.index])
@@ -279,7 +280,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        sfm = superfastmatch.Client(url=SUPERFASTMATCH['default'][0]['url'])
 
         for index in [0,1,2,3,4,5,6,7]:
             scraper = CongressLeadership(index)
@@ -301,26 +301,38 @@ class Command(BaseCommand):
                 scraper.get_white_house_links(scraper.leaders[index])
 
             for link in scraper.links:
-                doc = scraper.extract(link)
                 
                 #store in database 
-                (source, created) = Source.objects.get_or_create(organization=doc['source'], source_type=3)
-                (release, created) = Release.objects.get_or_create(url=link, source=source, title=doc['title'], body=doc['text'], date=doc['date'])
+                #leave sources as get or create so we can keep track of when page urls change or new members are added easily
+                (source,created) = Source.objects.get_or_create(url=scraper.urls[index], source_type=3)
 
-                resp = None
-   
-            	try:
-                    #add to superfastmatch, using database id
-                    resp = sfm.add(self.doctype, release.id, doc['text'], True, title=doc['title'], source=source.organization, url=link, date=doc['date'], put=False, accepted_codes=[200, 202])
-                    print link
-                    print resp
+                try:
+                    doc = scraper.extract(link)
+              
+                    try:
+                        release = Release.objects.get(url=link)
+                        release.source=source
+                        release.title=doc['title']
+                        release.body=doc['text']
+                        release.date=doc['date']
+                        release.save()
+                        print "saved release %s" % link
+                    except Release.DoesNotExist:
+                        release = Release(url=link,
+                                          title= doc['title'],
+                                          body=doc['text'],
+                                          date=doc['date'],
+                                          source=source)
+                        release.save()
 
-                except superfastmatch.SuperFastMatchError as e:
-                    if e.status == 200:
-                        print e
-                    else:
-                        print "Problem parsing and posting " + link
-
+                except Exception as e:
+                    print e
+                    buf = StringIO()
+                    print_exc(1000, buf)
+                    f = SourceScrapeFailure.objects.create(source=source, 
+                                                           traceback=buf.getvalue(), 
+                                                           description=unicode(e))
+ 
 
 
 
