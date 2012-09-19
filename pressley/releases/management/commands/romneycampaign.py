@@ -144,7 +144,7 @@ class Command(BaseCommand):
                     title=r.title,
                     body=r.body)
                 if created:
-                    logging.info("Scraped {rel.url)".format(rel=r))
+                    logging.info("Scraped {rel.url}".format(rel=r))
 
         except Exception as e:
             buf = StringIO()
