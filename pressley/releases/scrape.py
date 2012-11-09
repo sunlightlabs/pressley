@@ -3,6 +3,7 @@
 import requests
 import logging
 import dateutil.parser
+from mimeparse import parse_mime_type
 from util import kill_control_characters, readability_extract
 from now import now
 from releases.models import Release
@@ -13,15 +14,21 @@ def get_link_content(link):
         if response.status_code != 200:
             raise Exception("Unable to fetch release content: {0}".format(link))
     except requests.exceptions.InvalidURL as e:
-        logging.warn("Invalid link: {0}".format(link))
+        logging.warn(u"Invalid link {0}: {1}".format(link, unicode(e)))
         return None
 
-    if response.headers.get('content-type') not in ('text/html', 'text/xhtml'):
-        logging.warn("Skipping non-HTML link: {0}".format(link))
+    content_type = response.headers.get('content-type')
+    if not content_type:
+        logging.warn(u"Response did not contain a Content-Type header: {0}".format(link))
+        return None
+
+    (mime_type, mime_subtype, mt_params) = parse_mime_type(content_type)
+    if mime_type != 'text' or mime_subtype not in ('html', 'xhtml'):
+        logging.warn(u"Skipping non-HTML link: {0}".format(link))
         return None
 
     if len(response.content) == 0:
-        logging.warn("Server returned an empty body: {0}".format(link))
+        logging.warn(u"Server returned an empty body: {0}".format(link))
         return None
 
     (title, body) = readability_extract(response.content)
