@@ -15,7 +15,7 @@ class Source(models.Model):
     )
 
     source_type = models.IntegerField(choices=SOURCE_TYPE_CHOICES)
-    doc_type = models.IntegerField(null=True)
+    doc_type = models.IntegerField(null=True, blank=True)
     organization = models.TextField(null=False)
     url = models.URLField(null=False, unique=True, max_length=512)
     last_retrieved = models.DateTimeField(null=True, blank=True)
