@@ -18,6 +18,7 @@ class Source(models.Model):
     doc_type = models.IntegerField(null=True, blank=True)
     organization = models.TextField(null=False)
     url = models.URLField(null=False, unique=True, max_length=512)
+    user_agent = models.CharField(max_length=255, null=True, blank=True)
     last_retrieved = models.DateTimeField(null=True, blank=True)
     last_failure = models.OneToOneField('SourceScrapeFailure', null=True, blank=True, related_name='failed_source')
 
@@ -38,7 +39,10 @@ class Source(models.Model):
             return None
 
         try:
-            response = requests.get(self.url)
+            kwargs = {}
+            if self.user_agent:
+                kwargs['headers'] = { 'User-Agent': self.user_agent }
+            response = requests.get(self.url, **kwargs)
         except requests.exceptions.ConnectionError as e:
             raise SourceScrapeFailure.objects.create(source=self,
                                                      description=str(e))
