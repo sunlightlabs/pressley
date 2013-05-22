@@ -24,6 +24,7 @@ class SourceAdmin(admin.ModelAdmin):
     list_display = ['id', 'source_type', 'doc_type', 'organization', 'last_retrieved', 'url']
     ordering = ['organization']
     readonly_fields = ['last_retrieved', 'last_failure']
+    search_fields = ['organization', 'url']
 
 admin.site.register(Source, SourceAdmin)
 
