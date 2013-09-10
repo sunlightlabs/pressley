@@ -19,7 +19,8 @@ def post_release_to_superfastmatch(release, sfm, doctype):
                          title=release.title,
                          date=release.date,
                          source=release.source.organization,
-                         defer=True)
+                         defer=True,
+                         put=False)
         if result.get('success') == True:
             logging.info(u"Posted release {0} to superfastmatch doctype {1}".format(release.id, doctype))
             return True
