@@ -16,7 +16,7 @@ import dateutil.parser
 from optparse import make_option
 from django.core.management import BaseCommand, CommandError
 
-from util import kill_control_characters, readability_extract
+from pressley.util import kill_control_characters, readability_extract
 from sources.models import Source, SourceScrapeFailure
 from releases.models import Release
 

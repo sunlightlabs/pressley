@@ -4,8 +4,8 @@ import requests
 import logging
 import dateutil.parser
 from mimeparse import parse_mime_type
-from util import kill_control_characters, readability_extract
-from now import now
+from pressley.util import kill_control_characters, readability_extract
+from pressley.now import now
 from releases.models import Release
 
 def get_link_content(link):

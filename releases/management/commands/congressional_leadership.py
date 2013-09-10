@@ -15,7 +15,7 @@ from datetime import datetime
 import requests
 import feedparser
 
-from util import readability_extract, condense_whitespace
+from pressley.util import readability_extract, condense_whitespace
 from releases.models import Release
 from sources.models import Source, SourceScrapeFailure
  

@@ -3,8 +3,8 @@
 import logging
 from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
-from now import now
-from util import kill_control_characters
+from pressley.now import now
+from pressley.util import kill_control_characters
 from releases.scrape import get_link_content
 from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings

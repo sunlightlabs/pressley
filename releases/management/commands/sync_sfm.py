@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
 from django.conf import settings
 from optparse import make_option
-from now import now
+from pressley.now import now
 from releases.superfastmatch_interop import post_release_to_superfastmatch
 from superfastmatch.djangoclient import from_django_conf
 

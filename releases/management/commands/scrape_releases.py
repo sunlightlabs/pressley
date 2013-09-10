@@ -17,8 +17,8 @@ import datetime
 import dateutil.parser
 import requests
 import superfastmatch
-from util import readability_extract, kill_control_characters
-from now import now
+from pressley.util import readability_extract, kill_control_characters
+from pressley.now import now
 from releases.scrape import scrape_release
 from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings
