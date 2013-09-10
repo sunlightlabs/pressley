@@ -2,7 +2,7 @@ import json
 import httplib
 import requests
 import feedparser
-from now import now
+from pressley.now import now
 from django.db import models
 from django.conf import settings
 
