@@ -11,6 +11,9 @@ from releases.models import Release
 def get_link_content(link):
     try:
         response = requests.get(link)
+        if response.status_code == 400:
+            logging.warn(u"404 {}".format(link))
+            return None
         if response.status_code != 200:
             raise Exception(u"Unable to fetch release content: {0}".format(link))
     except requests.exceptions.InvalidURL as e:
