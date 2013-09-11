@@ -12,7 +12,7 @@ def get_link_content(link):
     try:
         response = requests.get(link)
         if response.status_code != 200:
-            raise Exception("Unable to fetch release content: {0}".format(link))
+            raise Exception(u"Unable to fetch release content: {0}".format(link))
     except requests.exceptions.InvalidURL as e:
         logging.warn(u"Invalid link {0}: {1}".format(link, unicode(e)))
         return None
