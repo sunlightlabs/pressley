@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+{% load generictags %}
+
+{% block body-class %}source-index{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <span>{{ source_count }} sources from {{ org_count }} organizations</span>
+            </div>
+            <div class="col-xs-12">
+                <h3>Search:</h3>
+                <form class="form-inline" method="get" action=".">
+                    <ul>
+                        {{ search_form.as_ul }}
+                        <li>
+                            <input type="submit" value="Search">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Sources</h3>
+                <div id="source-list-box" class="container">
+                    {% for src in sources_found %}
+                        <p class="row result-row {% cycle 'even' 'odd' %}">
+                        <span class="col-xs-6">{{ src.organization|default:"(missing)" }}</span>
+                        <span class="col-xs-6 no-overflow"><a href="{{ src.url }}">{{ src.url|url_abbrev }}</a></span>
+                        <span class="col-xs-6 pull-right">Last Scraped: {{ src.last_retrieved|naturalday|default_if_none:"Never" }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+

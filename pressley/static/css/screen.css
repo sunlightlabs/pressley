@@ -1,0 +1,157 @@
+body {
+    font-family: Arvo;
+}
+
+.full-width
+{
+    width: 100%;
+}
+.full-height
+{
+    height: 100%;
+}
+
+nav.navbar, body.login
+{
+    background:
+        radial-gradient(#dfdfdf 15%, transparent 16%) 0 0,
+        radial-gradient(#dfdfdf 15%, transparent 16%) 3px 3px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 3px 4px;
+    background-color: #efefef;
+    background-size: 7px 7px;
+}
+nav.navbar {
+    height: 40px;
+    padding-top: 8px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+header.navbar-header
+{
+    display: inline;
+}
+
+header.navbar-header h1#navbar-logo-name
+{
+    display: inline;
+    font-family: Arvo;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+header.navbar-header h2#navbar-logo-subtitle
+{
+    display: inline;
+    font-family: Arvo;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: normal;
+    position: relative;
+    top: 1em;
+    left: -4em;
+}
+
+div#release-form-box ul li {
+    display: inline-block;
+}
+div#release-form-box input#id_url {
+    width: 400px;
+}
+
+body.test-release div#scraped-content-box
+{
+    font-size: 16px;
+    width: 760px;
+}
+
+form ul {
+    padding: 0;
+}
+
+form ul li {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-family: Arvo;
+}
+h1 {
+    font-size: 22px;
+}
+h2 {
+    font-size: 20px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 12px;
+}
+
+.vertically-centered
+{
+    position: absolute;
+    top: 50%;
+}
+
+body.login div.container > div
+{
+    width: 260px;
+    height: 200px;
+    margin-top: -100px;
+    margin-bottom: 35px;
+}
+body.login header
+{
+    margin-bottom: 30px;
+}
+
+body.login h1#logo-name
+{
+    display: inline;
+    font-family: Arvo;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+body.login h2#logo-subtitle
+{
+    display: inline;
+    font-family: Arvo;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: normal;
+    position: relative;
+    top: 1em;
+    left: -4em;
+}
+.no-overflow { overflow: hidden; }
+
+
+.result-row.odd {
+    background-color: rgb(235, 235, 235);
+}
+.result-row.even {
+    background-color: transparent;
+}
+.result-row
+{
+    border-bottom: 1px solid rgb(160, 160, 160);
+    margin: 0;
+    padding: 6px 0 6px 0;
+    /* background-image: linear-gradient(to bottom, rgb(244, 244, 244), transparent, rgb(244, 244, 244)); */
+}
+.result-row:last-child
+{
+    border-bottom: none;
+}
+

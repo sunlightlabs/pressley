@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body-class %}login{% endblock %}
+
+{% block body %}
+
+    <div class="container vertically-centered">
+        <div class="center-block">
+            <div class="row">
+                <header class="col">
+                    <h1 id="logo-name">Pressley</h1>
+                    {% if deployment_name %}
+                        <h2 id="logo-subtitle">for {{ deployment_name }}</h2>
+                    {% endif %}
+                </header>
+
+                <div id="login-form-box">
+                    <form method="post" action=".">
+                      {% csrf_token %} 
+                      <ul>
+                          {{ form.as_ul }}
+
+                          <li><input type="submit" value="Log in" /></li>
+                          <li><input type="hidden" name="next" value="{{ next }}" /></li>
+                      </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+

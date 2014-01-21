@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body-class %}test-source{% endblock %}
+
+{% block body %}
+
+    <div id="source-form-box">
+        {{ form.as_ul }}
+    </div>
+
+    <div id="scraped-content-box">
+        {% for pg in paragraphs %}
+        <p>
+        {{ pg }}
+        </p>
+        {% endfor %}
+    </div>
+
+{% endblock body %}

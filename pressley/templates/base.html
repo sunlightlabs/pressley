@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css" media="screen">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.css" media="screen">
+        <link href="//fonts.googleapis.com/css?family=Arvo:400italic,400,700italic,700" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css" media="screen">
+    </head>
+
+    <body class="{% block body-class %}base{% endblock %}">
+        {% block body %}
+            <nav class="navbar">
+                <header class="navbar-header">
+                    <h1 id="navbar-logo-name">Pressley</h1>
+                    {% if deployment_name %}
+                        <h2 id="navbar-logo-subtitle">for {{ deployment_name }}</h2>
+                    {% endif %}
+
+                </header>
+            </nav>
+
+            {% block content %}
+            {% endblock content %}
+        {% endblock %}
+    </body>
+
+    {% block js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    {% endblock %}
+
+    {% block js-extra %}
+    {% endblock %}
+
+</html>
+

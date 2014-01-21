@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block body-class %}test-release{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>URL To Scrape</h2>
+                <div id="release-form-box">
+                    <form class="form-inline" method="post" action=".">
+                        {% csrf_token %} 
+                        <ul>
+                            {{ form.as_ul }}
+                            <li>
+                                <input type="submit" value="Scrape Test">
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Scraped Content</h2>
+                <div id="scraped-content-box">
+                    {% if title %}
+                        <h3>{{ title }}</h3>
+                    {% endif %}
+                    {% for pg in paragraphs %}
+                        <p>
+                            {{ pg }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+

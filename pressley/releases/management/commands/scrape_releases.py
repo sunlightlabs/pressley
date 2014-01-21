@@ -2,23 +2,14 @@ import logging
 from django.core.management.base import BaseCommand, CommandError
 from releases.models import Release
 from sources.models import Source, SourceScrapeFailure
-from readability.readability import Document
-from lxml import html
+from releases.scraping import get_link_content
 import datetime
-from util import condense_whitespace
 import dateutil.parser
-import requests
 import superfastmatch
 from now import now
 from superfastmatch.djangoclient import from_django_conf
 from django.conf import settings
 
-
-def get_link_content(link):
-    content = requests.get(link).content
-    readable = Document(content)
-    body = html.fromstring(readable.summary()).text_content()
-    return condense_whitespace(body)
 
 class Command(BaseCommand):
     args = '<none>'
@@ -39,7 +30,7 @@ class Command(BaseCommand):
                                          entry.get('a10:updated') or
                                          now())
             source_name = source.organization
-            body = get_link_content(link)
+            (_trash_title, body) = get_link_content(link)
 
             (release, created) = Release.objects.get_or_create(url=link,
                                                                title=title,
